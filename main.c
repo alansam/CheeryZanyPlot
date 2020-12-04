@@ -6,15 +6,15 @@
 #include <stdbool.h>
 
 /* **********************************************************************************
-			Nick Eddy  CIS-236  Pam Dunn  Joiet Junior College  Program 13
-		
-	Write a program that stores information about movies, using an
+  Nick Eddy  CIS-236  Pam Dunn  Joiet Junior College  Program 13
+    
+  Write a program that stores information about movies, using an
   array of structures and a text file. This program modifies
   Program 12. 
 
                                 (Program 12)
 
-	Write a program that stores information about movies, using an
+  Write a program that stores information about movies, using an
   array of structures.
 Prompt the user for the number of movies to process. Then prompt
 the user for the  title and number of downloads for each movie.
@@ -24,8 +24,8 @@ use functions as described in the requirements below.
 ***********************************************************************************
 */
 
-typedef struct {			//structure declaration
-  char name[21];	
+typedef struct {      //structure declaration
+  char name[21];  
   int number;
 } film_t;
 
@@ -75,8 +75,8 @@ int main() {
     }
 
     ans = displayMenu(); 
-	 	//calls fucntion to print with array and loop counts
-	}
+     //calls fucntion to print with array and loop counts
+  }
   fclose(pointer);
 
   return 0;
@@ -144,7 +144,7 @@ void addMovie(FILE * fPtr) {
     printf("Account #%d already contains information.\n",
            client.number);
   }
-	else { // create record
+  else { // create record
     // user enters last name, first name and balance
     printf("%s", "Enter Moive Title, number of downloads? \n");
     scanf("%14s%9d", client.name, &client.number);
@@ -154,7 +154,7 @@ void addMovie(FILE * fPtr) {
 
     // insert record in file                       
     fwrite(&client, sizeof(film_t), 1, fPtr);     
-	}
+  }
 }
 
 void deleteMovie(FILE * ptr) {
@@ -168,7 +168,7 @@ void deleteMovie(FILE * ptr) {
   film_t client; // stores record read from file
 
   // read record from file
-	fread(&client, sizeof(film_t), 1, ptr);
+  fread(&client, sizeof(film_t), 1, ptr);
 
   // display error if record does not exist
   if (client.number == 0) {
@@ -182,7 +182,7 @@ void deleteMovie(FILE * ptr) {
 
     // replace existing record with blank record
     fwrite(&blankClient, sizeof(film_t), 1, ptr);
-	}
+  }
 }
 
 void updateMovie(FILE * ptr) {
@@ -217,7 +217,7 @@ void updateMovie(FILE * ptr) {
 
     // write updated record over old record in file
     fwrite(&client, sizeof(film_t), 1, ptr);
-	} 
+  } 
 }
 
 void displayMovieInfo(FILE * ptr) {
@@ -238,8 +238,8 @@ void displayMovieInfo(FILE * ptr) {
 }
 
 void displayMovies(film_t array[], int ad) {
-  printf("\n%-30s%30s", "Title", "Downloads");		//prints labels
-  printf("\n%-30s%30s", "=======", "=======");		//prints table line
+  printf("\n%-30s%30s", "Title", "Downloads");    //prints labels
+  printf("\n%-30s%30s", "=======", "=======");    //prints table line
 
   //loop to print each index of structure array
   for (int i = 0; i < ad; i++) {
