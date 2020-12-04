@@ -49,7 +49,7 @@ int main() {
     exit(EXIT_FAILURE);
   }
 
-	unsigned int ans = displayMenu();
+  unsigned int ans = displayMenu();
 
   while (ans != 5) {
     switch (ans) {
@@ -74,10 +74,10 @@ int main() {
         break;
     }
 
-  	ans = displayMenu(); 
+    ans = displayMenu(); 
 	 	//calls fucntion to print with array and loop counts
 	}
-	fclose(pointer);
+  fclose(pointer);
 
   return 0;
 }
@@ -122,27 +122,28 @@ unsigned int displayMenu() {
   } while(!complete);
 
   return request;      
-} 
+}
 
 void addMovie(FILE * fPtr) {
-		// obtain number of account to create
-	printf("%s", "Enter new account number (1 - 10): ");
-	unsigned int accountNum; // account number
-	scanf("%d", &accountNum);
+    // obtain number of account to create
+  printf("%s", "Enter new account number (1 - 10): ");
+  unsigned int accountNum; // account number
+  scanf("%d", &accountNum);
 
-	// move file pointer to correct record in file                 
-	fseek(fPtr, (accountNum - 1) * sizeof(film_t), SEEK_SET);
+  // move file pointer to correct record in file                 
+  fseek(fPtr, (accountNum - 1) * sizeof(film_t), SEEK_SET);
 
-	// create clientData with default information
-	film_t client = { "", 0};
+  // create clientData with default information
+  film_t client = { "", 0};
 
-	// read record from file                               
-	fread(&client, sizeof(film_t), 1, fPtr);
+  // read record from file                               
+  fread(&client, sizeof(film_t), 1, fPtr);
 
-	// display error if account already exists
-	if (client.number != 0) {
-		printf("Account #%d already contains information.\n", client.number);
-	}
+  // display error if account already exists
+  if (client.number != 0) {
+    printf("Account #%d already contains information.\n",
+           client.number);
+  }
 	else { // create record
     // user enters last name, first name and balance
     printf("%s", "Enter Moive Title, number of downloads? \n");
@@ -165,15 +166,15 @@ void deleteMovie(FILE * ptr) {
   fseek(ptr, (accountNum - 1) * sizeof(film_t), SEEK_SET);
 
   film_t client; // stores record read from file
-	
-	// read record from file
+
+  // read record from file
 	fread(&client, sizeof(film_t), 1, ptr);
 
   // display error if record does not exist
   if (client.number == 0) {
     printf("Account %d does not exist.\n", accountNum);
   }
-	else { // delete record
+  else { // delete record
     // move file pointer to correct record in file                 
     fseek(ptr, (accountNum - 1) * sizeof(film_t), SEEK_SET);
 
@@ -192,11 +193,11 @@ void updateMovie(FILE * ptr) {
   // move file pointer to correct record in file              
   fseek(ptr, (account - 1) * sizeof(film_t), SEEK_SET);
 
-	// create clientData with no information
-	film_t client = { "", 0};
+  // create clientData with no information
+  film_t client = { "", 0};
 
-	// read record from file
-	fread(&client, sizeof(film_t), 1, ptr);
+  // read record from file
+  fread(&client, sizeof(film_t), 1, ptr);
 
   // display error if account does not exist
   if (client.number == 0) {
@@ -211,11 +212,11 @@ void updateMovie(FILE * ptr) {
 
     printf("%-6s%-16d\n", client.name, client.number);
 
-		// move file pointer to correct record in file
-		fseek(ptr, (account - 1) * sizeof(film_t), SEEK_SET);
+    // move file pointer to correct record in file
+    fseek(ptr, (account - 1) * sizeof(film_t), SEEK_SET);
 
-		// write updated record over old record in file
-		fwrite(&client, sizeof(film_t), 1, ptr);
+    // write updated record over old record in file
+    fwrite(&client, sizeof(film_t), 1, ptr);
 	} 
 }
 
